@@ -1,0 +1,37 @@
+.admin { max-width: 1400px; margin: 0 auto; padding: 32px 24px 80px; font-size: 14px; }
+.admin-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 24px; }
+.admin-top h1 { font-size: 24px; color: var(--ink); }
+.admin-top form { display: flex; align-items: center; gap: 12px; color: var(--muted); }
+.admin button { border: 1px solid var(--ink); background: #fff; color: var(--ink); padding: 8px 14px; font-weight: 600; }
+.admin-filter { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.admin-filter select, .admin-filter input { border: 1px solid #ccc; padding: 8px 10px; }
+.admin-filter input { flex: 1; min-width: 200px; }
+.admin-filter button { background: var(--ink); color: #fff; }
+.admin-sum { margin-bottom: 12px; }
+.admin-sum b { color: var(--ink); }
+.admin-table-wrap { overflow-x: auto; border-top: 2px solid var(--ink); }
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th, .admin-table td { padding: 12px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; white-space: nowrap; }
+.admin-table th { background: #fafafa; color: var(--ink); font-weight: 700; }
+.admin-table td.memo { white-space: pre-wrap; min-width: 200px; max-width: 320px; }
+.admin-table td.empty { text-align: center; padding: 48px; color: var(--muted); }
+.admin-table .mono { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); }
+.admin-table a { text-decoration: underline; }
+.admin button.small { padding: 4px 8px; font-size: 12px; border-color: #ccc; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 700; background: #eee; color: #555; }
+.badge.paid { background: #111; color: #fff; }
+.badge.failed { background: #fde8e8; color: #c22; }
+.badge.cancelled { background: #f1f1f1; color: #999; text-decoration: line-through; }
+.admin-help { margin-top: 16px; color: var(--muted); font-size: 13px; }
+
+/* 모바일: 표 → 카드 */
+@media (max-width: 768px) {
+  .admin { padding: 20px 16px 60px; }
+  .admin-top { flex-direction: column; align-items: flex-start; }
+  .admin-table thead { display: none; }
+  .admin-table, .admin-table tbody, .admin-table tr, .admin-table td { display: block; width: 100%; }
+  .admin-table tr { border-bottom: 1px solid var(--ink); padding: 8px 0; }
+  .admin-table td { border: 0; padding: 4px 0; white-space: normal; display: flex; gap: 12px; }
+  .admin-table td[data-label]::before { content: attr(data-label); flex: 0 0 72px; color: var(--muted); }
+  .admin-table td.memo { max-width: none; }
+}

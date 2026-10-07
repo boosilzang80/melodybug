@@ -1,49 +1,377 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #111;
+  --text: #444;
+  --muted: #888;
+  --line: #e5e5e5;
+  --beige: #f4f2ee;
+  --point: #ffd400; /* 실시간상담 버튼 노랑 */
+  --max: 1200px;
+  --header-h: 76px;
+  --font-title: "Noto Sans KR", "Noto Sans", "Nanum Gothic", "Malgun Gothic", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+  color: var(--text);
+  background: #fff;
+  line-height: 1.6;
+  word-break: keep-all;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+input, textarea, select { font: inherit; }
+.inner { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.pre { white-space: pre-line; }
+
+/* ---------- header ---------- */
+.header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.header.scrolled { border-color: var(--line); }
+.header .inner { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: 26px; letter-spacing: -0.5px; color: var(--ink); font-weight: 300; }
+.logo b { font-weight: 800; }
+.gnb { display: flex; gap: 36px; font-size: 14px; font-weight: 600; color: var(--ink); }
+.gnb a:hover { opacity: .6; }
+.menu-btn { display: none; background: none; border: 0; width: 40px; height: 40px; position: relative; }
+.menu-btn span, .menu-btn::before, .menu-btn::after { content: ""; position: absolute; left: 9px; right: 9px; height: 2px; background: var(--ink); transition: .2s; }
+.menu-btn::before { top: 13px; } .menu-btn span { top: 19px; } .menu-btn::after { top: 25px; }
+.menu-btn.open::before { top: 19px; transform: rotate(45deg); }
+.menu-btn.open span { opacity: 0; }
+.menu-btn.open::after { top: 19px; transform: rotate(-45deg); }
+
+/* ---------- hero ---------- */
+.hero { --fs: clamp(40px, 5.2vw, 100px); --pad: clamp(40px, 4vw, 72px); position: relative; padding: var(--pad) 0 clamp(160px, 16vw, 320px); overflow: hidden; }
+/* 사진 배경은 제목 4번째 줄(Artistry)부터 시작 */
+.hero-bg { position: absolute; left: 0; right: 0; bottom: 0; top: calc(var(--pad) + var(--fs) * 2.84); background: #2b3a48; }
+.hero-bg img { object-fit: cover; opacity: 0; transition: opacity 1.6s ease-in-out; }
+.hero-bg img.on { opacity: 1; }
+.hero-text { position: relative; z-index: 1; }
+.hero h1 { font-size: var(--fs); line-height: 1; font-weight: 800; color: #0e1a17; letter-spacing: -0.04em; white-space: nowrap; }
+.hero h1 span { display: block; }
+.hero .ko { display: inline-block; margin-top: clamp(28px, 3vw, 56px); background: #000; color: #fff; font-size: clamp(18px, 1.9vw, 36px); font-weight: 700; letter-spacing: -0.02em; padding: 2px 12px; }
+.hero-sub { padding: 120px 0; background: #f7f8fc; text-align: center; }
+.hero-sub .eyebrow { font-size: 22px; color: #777; letter-spacing: -0.03em; }
+.hero-sub h2 { margin-top: 4px; font-size: 40px; font-weight: 800; color: #000; letter-spacing: -0.05em; line-height: 1.3; }
+.hero-sub .desc { margin-top: 20px; font-size: 22px; font-weight: 500; color: #111; letter-spacing: -0.03em; line-height: 1.5; }
+
+/* ---------- sections ---------- */
+.section { padding: 120px 0; }
+.section.beige { background: var(--beige); }
+.sec-title { font-size: 40px; font-weight: 800; color: var(--ink); letter-spacing: -1px; margin-bottom: 40px; }
+.sec-title small { display: block; font-size: 14px; font-weight: 600; letter-spacing: 2px; color: var(--muted); margin-bottom: 8px; }
+
+.intro { text-align: center; }
+.intro-title { font-size: 44px; font-weight: 800; color: #999; letter-spacing: -0.06em; margin-bottom: 20px; }
+.intro-text { font-size: 24px; line-height: 1.85; color: #666; letter-spacing: -0.03em; }
+.intro-promise { margin-top: 10px; font-size: 26px; font-weight: 700; color: #000; letter-spacing: -0.05em; }
+.genres { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 36px; }
+.genre { height: 178px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; letter-spacing: -0.05em; }
+.genre.g1 { background: #a9c031; color: #fff; }
+.genre.g2 { background: #000; color: #fff; }
+.genre.g3 { background: #f1f1f1; color: #000; }
+.genre.g4 { background: #f4fc00; color: #000; }
+
+/* ---------- pricing ---------- */
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.plan { border: 1px solid var(--line); background: #fff; padding: 40px 32px; display: flex; flex-direction: column; }
+.plan h3 { font-size: 28px; font-weight: 800; color: var(--ink); letter-spacing: 1px; }
+.plan .price { font-size: 22px; font-weight: 700; color: var(--ink); margin-top: 8px; }
+.plan .price span { font-size: 15px; font-weight: 500; color: var(--muted); }
+.plan .desc { margin-top: 24px; font-size: 15px; }
+.plan .warn { margin-top: 8px; font-size: 13px; color: #d33; }
+.plan .detail { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; }
+.plan .detail dt { font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.plan .btn { margin-top: auto; }
+.btn { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 24px; background: var(--ink); color: #fff; border: 0; font-weight: 700; font-size: 16px; transition: opacity .2s; }
+.btn:hover { opacity: .85; }
+.btn:disabled { opacity: .4; cursor: default; }
+.btn.line { background: #fff; color: var(--ink); border: 1px solid var(--ink); }
+.plan .btn { margin-top: 32px; width: 100%; }
+
+/* ---------- notice tabs ---------- */
+.notice-lead { font-size: 17px; margin-bottom: 32px; }
+.tabs { display: flex; border-bottom: 1px solid var(--ink); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+.tabs button { flex: 1; min-width: 120px; background: none; border: 0; padding: 16px 12px; font-weight: 600; color: var(--muted); white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -1px; }
+.tabs button.on { color: var(--ink); border-color: var(--ink); }
+.tab-body { padding: 40px 8px; font-size: 15px; line-height: 1.9; white-space: pre-line; min-height: 280px; }
+.tab-body h4 { font-size: 20px; color: var(--ink); margin-bottom: 16px; }
+
+/* ---------- bgm / career ---------- */
+.career { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.career h4 { font-size: 18px; color: var(--ink); margin-bottom: 16px; }
+.career ul { list-style: none; font-size: 15px; line-height: 2; }
+.career .note { font-size: 13px; color: var(--muted); margin-top: 12px; white-space: pre-line; }
+
+/* ---------- portfolio ---------- */
+.portfolio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.portfolio iframe { width: 100%; height: 166px; border: 0; display: block; }
+.portfolio-more { margin-top: 32px; text-align: center; }
+
+/* ---------- footer ---------- */
+.footer { background: #2f2421; color: #fff; font-size: 14px; letter-spacing: -0.03em; padding: 64px 0 72px; }
+.footer-in { display: flex; gap: 64px; }
+.footer-brand { flex: 0 0 200px; }
+.footer-logo { font-size: 30px; font-weight: 300; letter-spacing: -0.5px; padding-left: 8px; }
+.footer-logo b { font-weight: 800; }
+.footer .copy { margin-top: 44px; color: #9a8f8b; font-size: 13px; line-height: 1.5; }
+.footer .links { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; margin-top: 4px; margin-bottom: 36px; }
+.footer .links .bar { width: 1px; height: 13px; background: #fff; }
+.footer .biz { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; line-height: 1.9; }
+.footer .biz em { font-style: normal; color: #8f8380; margin-right: 8px; }
+.footer .biz-check { background: #fff; color: #333; border-radius: 3px; padding: 1px 6px; font-size: 12px; line-height: 1.6; }
+
+/* ---------- floating ---------- */
+.float-chat { position: fixed; right: 24px; bottom: 96px; z-index: 40; width: 88px; height: 88px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+.float-chat em { font-style: normal; background: var(--point); color: var(--ink); padding: 2px 8px; border-radius: 10px; margin-top: 4px; }
+.float-top { position: fixed; right: 44px; bottom: 40px; z-index: 40; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--ink); font-size: 18px; }
+
+/* ---------- order / result / simple pages ---------- */
+.page { max-width: 640px; margin: 0 auto; padding: 72px 24px 120px; }
+.page h1 { font-size: 32px; font-weight: 800; color: var(--ink); margin-bottom: 32px; }
+.summary { border: 1px solid var(--ink); padding: 24px; margin-bottom: 32px; }
+.summary .row { display: flex; justify-content: space-between; padding: 6px 0; }
+.summary .total { border-top: 1px solid var(--line); margin-top: 8px; padding-top: 14px; font-weight: 800; color: var(--ink); font-size: 18px; }
+.plan-pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
+.plan-pick label { display: block; border: 1px solid var(--line); padding: 14px 8px; text-align: center; cursor: pointer; font-size: 14px; }
+.plan-pick label b { display: block; color: var(--ink); font-size: 16px; }
+.plan-pick input { display: none; }
+.plan-pick input:checked + label { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.field { margin-bottom: 18px; }
+.field label { display: block; font-weight: 600; color: var(--ink); margin-bottom: 6px; font-size: 14px; }
+.field input, .field textarea { width: 100%; border: 1px solid #ccc; padding: 13px 14px; font-size: 16px; border-radius: 0; background: #fff; }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); }
+.field textarea { min-height: 120px; resize: vertical; }
+.agree { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; margin: 24px 0; }
+.agree a { text-decoration: underline; }
+.error { color: #d33; font-size: 14px; margin-bottom: 12px; }
+.page .btn { width: 100%; }
+.result-box { border: 1px solid var(--line); padding: 24px; margin: 24px 0 32px; }
+.result-box .row { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; font-size: 15px; }
+.result-box .row span:first-child { color: var(--muted); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1024px) {
+  .genres { grid-template-columns: repeat(2, 1fr); }
+  .plans { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .portfolio { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  :root { --header-h: 60px; }
+  .inner { padding: 0 16px; }
+  .logo { font-size: 22px; }
+  .menu-btn { display: block; }
+  .gnb { display: none; position: absolute; top: var(--header-h); left: 0; right: 0; background: #fff; flex-direction: column; gap: 0; border-bottom: 1px solid var(--line); }
+  .gnb.open { display: flex; }
+  .gnb a { padding: 16px; border-top: 1px solid var(--line); font-size: 16px; }
+  .hero-sub { padding: 64px 0; }
+  .hero-sub .eyebrow { font-size: 15px; }
+  .hero-sub h2 { font-size: 24px; }
+  .hero-sub .desc { margin-top: 14px; font-size: 15px; }
+  .section { padding: 72px 0; }
+  .sec-title { font-size: 28px; margin-bottom: 28px; }
+  .intro-title { font-size: 28px; }
+  .intro-text { font-size: 15px; }
+  .intro-text br { display: none; }
+  .intro-promise { font-size: 16px; }
+  .genres { margin-top: 28px; gap: 10px; }
+  .genre { height: 100px; font-size: 18px; }
+  .plan { padding: 28px 22px; }
+  .tabs button { flex: none; }
+  .tab-body { padding: 28px 0; font-size: 14px; }
+  .career { grid-template-columns: 1fr; gap: 32px; }
+  .portfolio { grid-template-columns: 1fr; }
+  .float-chat { width: 64px; height: 64px; font-size: 10px; right: 16px; bottom: 76px; }
+  .float-top { right: 24px; bottom: 20px; width: 42px; height: 42px; }
+  .page { padding: 40px 16px 80px; }
+  .footer { padding: 40px 0 100px; font-size: 13px; }
+  .footer-in { flex-direction: column; gap: 24px; }
+  .footer-brand { flex: none; }
+  .footer-logo { font-size: 24px; padding: 0; }
+  .footer .copy { margin-top: 8px; }
+  .footer .links { margin-bottom: 16px; }
+  .footer .biz { gap: 0 12px; }
+  .page h1 { font-size: 26px; }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+/* ---------- 가격정보 (원본 톤) ---------- */
+.price-sec { background: #f6f5f1; }
+.price-title { text-align: center; color: #000; margin-bottom: 32px; }
+.price-sec .plan { border: 0; background: #fafafa; }
+.price-sec .plan h3 { font-size: 34px; }
+.price-sec .plan .price { font-size: 26px; }
+.price-sec .plan .desc { font-size: 17px; }
+.price-sec .plan .warn { font-size: 15px; }
+.price-sec .plan .detail { font-size: 16px; }
+.price-sec .plan .btn { background: #f5d327; color: #000; font-size: 18px; font-weight: 800; border-radius: 4px; }
+@media (max-width: 768px) {
+  .price-sec .plan h3 { font-size: 28px; }
+  .price-sec .plan .price { font-size: 22px; }
+  .price-sec .plan .desc { font-size: 16px; }
+  .price-sec .plan .detail { font-size: 15px; }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* ---------- MelodyBug_BGM (어두운 사진 배경) ---------- */
+.bgm-sec {
+  background: linear-gradient(rgba(0, 0, 0, .62), rgba(0, 0, 0, .62)), url("/section_3/bg_guitar.jpg") center / cover fixed;
+  color: #fff; text-align: center; font-size: 22px; font-weight: 600; letter-spacing: -0.04em; line-height: 1.55;
+}
+.bgm-title { font-size: 56px; font-weight: 800; letter-spacing: -0.06em; margin-bottom: 40px; color: #fff; }
+.bgm-sec h4 { font-size: 22px; font-weight: 600; margin: 40px 0 28px; }
+.bgm-sec h4:first-of-type { margin-top: 0; }
+.bgm-sec ul { list-style: none; }
+.bgm-sec ul + ul { margin-top: 34px; }
+@media (max-width: 768px) {
+  /* iOS는 fixed 배경 미지원 → 일반 스크롤 */
+  .bgm-sec { background-attachment: scroll; font-size: 15px; }
+  .bgm-title { font-size: 32px; margin-bottom: 28px; }
+  .bgm-sec h4 { font-size: 16px; margin: 32px 0 16px; }
+  .bgm-sec ul + ul { margin-top: 24px; }
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* ---------- 주문전 필독 ---------- */
+.notice-sec { background: #f9f9f9; text-align: center; }
+.notice-sec .price-title { margin-bottom: 16px; }
+.notice-sec .notice-lead { color: #d40000; }
+.notice-sec .notice-lead b { font-weight: 800; }
+.notice-sec .tabs { border-bottom-color: #ddd; }
+.notice-sec .tabs button { color: #999; }
+.notice-sec .tabs button.on { color: #e8875b; border-color: #e8875b; }
+.notice-sec .tab-body h4 { color: #000; }
+
+/* ---------- 포트폴리오 유튜브 ---------- */
+.videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px 16px; margin-top: 64px; }
+.video { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; padding: 0; background: #000; overflow: hidden; }
+.video img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.video::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, .45); transition: background .3s; }
+.video .play { position: absolute; z-index: 1; left: 50%; top: 50%; width: 64px; height: 64px; transform: translate(-50%, -50%); opacity: .85; transition: opacity .3s; }
+button.video:hover img { transform: scale(1.04); }
+button.video:hover::after { background: rgba(0, 0, 0, .25); }
+button.video:hover .play { opacity: 1; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+div.video::after { display: none; }
+@media (max-width: 1024px) { .videos { grid-template-columns: repeat(2, 1fr); gap: 32px 12px; } }
+@media (max-width: 768px) { .videos { grid-template-columns: 1fr; gap: 16px; margin-top: 32px; } }
+
+/* ---------- 제목(굵은 글씨) 폰트: 기존 사이트와 동일하게 Noto Sans ---------- */
+h1, h2, h3, h4,
+.hero .ko, .intro-title, .intro-promise, .genre, .bgm-title, .plan .price, .btn {
+  font-family: var(--font-title);
 }
+.hero h1, .intro-title, .bgm-title { font-weight: 900; }
+
+/* 가격 카드: 상품명·가격·설명 굵게 + Noto Sans */
+.price-sec .plan h3, .price-sec .plan .price, .price-sec .plan .desc, .price-sec .plan .warn { font-family: var(--font-title); font-weight: 700; }
+.price-sec .plan h3 { font-weight: 900; }
+.price-sec .plan .price span { font-size: inherit; font-weight: inherit; color: inherit; }
+
+/* MelodyBug_BGM 섹션 전체 Noto Sans */
+.bgm-sec { font-family: var(--font-title); }
+
+/* 주문전 필독: Noto Sans + 제목에 비례해 크게 */
+.notice-sec .notice-lead { font-family: var(--font-title); font-size: 24px; font-weight: 500; letter-spacing: -0.04em; margin-bottom: 40px; }
+.notice-sec .notice-lead b { font-weight: 800; }
+.notice-sec .tabs button { font-size: 18px; padding: 18px 12px; }
+.notice-sec .tab-body { font-size: 18px; padding: 56px 8px; }
+.notice-sec .tab-body h4 { font-size: 30px; font-weight: 900; letter-spacing: -0.04em; margin-bottom: 28px; }
+@media (max-width: 768px) {
+  .notice-sec .notice-lead { font-size: 17px; margin-bottom: 28px; }
+  .notice-sec .tabs button { font-size: 15px; padding: 14px 12px; }
+  .notice-sec .tab-body { font-size: 15px; padding: 32px 0; }
+  .notice-sec .tab-body h4 { font-size: 22px; margin-bottom: 18px; }
+}
+
+/* 포트폴리오: Noto Sans + 더 넓게 */
+.portfolio-sec { font-family: var(--font-title); }
+.portfolio-sec .inner { max-width: 1520px; }
+
+/* 상단 메뉴·로고 */
+.gnb { font-family: inherit; font-size: 19px; font-weight: 700; gap: 48px; }
+.logo { font-size: 40px; }
+:root { --header-h: 88px; }
+@media (max-width: 1200px) and (min-width: 769px) { .gnb { gap: 28px; font-size: 16px; } .logo { font-size: 34px; } }
+@media (max-width: 768px) {
+  :root { --header-h: 64px; }
+  .gnb { font-size: 18px; }
+  .logo { font-size: 28px; }
+}
+.hero-sub h2 { font-weight: 900; }
+
+/* 메인 큰 제목 전용 폰트 (강원교육튼튼체) */
+@font-face {
+  font-family: "GangwonEduPowerExtraBoldA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.hero h1 {
+  font-family: "GangwonEduPowerExtraBoldA", var(--font-title);
+  font-weight: normal;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- 주문 페이지: 상품 정보 · 옵션 ---------- */
+.summary-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.summary-head h2 { font-size: 30px; font-weight: 900; color: #000; line-height: 1.2; }
+.summary-price { font-family: var(--font-title); font-size: 24px; font-weight: 700; color: #000; }
+.share-btn { position: relative; background: none; border: 0; color: #999; padding: 4px; }
+.share-btn:hover { color: var(--ink); }
+.share-tip { position: absolute; right: 0; top: 34px; white-space: nowrap; background: var(--ink); color: #fff; font-size: 12px; padding: 4px 8px; }
+.summary-desc { margin-top: 16px; font-size: 14px; }
+.summary-desc em { font-style: normal; color: #d33; font-size: 13px; }
+.summary-detail { display: flex; gap: 12px; margin: 14px 0 8px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.summary-detail dt { flex: none; font-weight: 700; color: var(--ink); }
+.opt-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+.opt-label { flex: 0 0 72px; font-weight: 700; color: var(--ink); font-size: 14px; }
+.opt-row select { flex: 1; min-width: 0; border: 1px solid #ccc; padding: 10px; background: #fff; font-size: 14px; }
+.qty { display: flex; border: 1px solid #ccc; }
+.qty button { width: 40px; height: 40px; background: #fff; border: 0; font-size: 18px; }
+.qty button:hover { background: #f5f5f5; }
+.qty span { width: 48px; display: flex; align-items: center; justify-content: center; border-left: 1px solid #ccc; border-right: 1px solid #ccc; }
+.summary .opt-row + .row { border-top: 1px solid var(--line); margin-top: 0; padding-top: 14px; }
+@media (max-width: 768px) {
+  .summary { padding: 18px; }
+  .summary-head h2 { font-size: 24px; }
+  .summary-price { font-size: 20px; }
+  .summary-detail { flex-direction: column; gap: 4px; }
+  .opt-label { flex-basis: 60px; font-size: 13px; }
+  .opt-row select { font-size: 13px; }
+}
+
+/* 주문 2단계: 카드 접기 */
+.summary-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .35s ease; }
+.summary-body > div { overflow: hidden; min-height: 0; }
+.summary.folded .summary-body { grid-template-rows: 0fr; }
+.summary.folded .summary-head { margin-bottom: 12px; }
+.change-btn { margin-left: auto; margin-right: 8px; background: #fff; border: 1px solid #ccc; padding: 6px 14px; font-size: 13px; font-weight: 600; }
+.change-btn:hover { border-color: var(--ink); }
+.info-step { animation: info-in .35s ease; }
+@keyframes info-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 스크롤 등장 애니메이션 ---------- */
+/* 숨길 때는 즉시, 나타날 때만 애니메이션 */
+.reveal-on [data-reveal] { opacity: 0; transform: translateY(40px); }
+.reveal-on [data-reveal].in {
+  opacity: 1;
+  transform: none;
+  transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1);
+  transition-delay: var(--d, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* 실시간상담 플로팅 (사진 버튼) */
+.float-chat { width: 120px; height: 120px; right: 20px; bottom: 100px; background: none; border-radius: 0; box-shadow: none; transition: transform .2s; }
+.float-chat:hover { transform: translateY(-4px); }
+.float-chat img { width: 100%; height: 100%; display: block; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .18)); }
+.float-top { right: 56px; }
+@media (max-width: 768px) {
+  .float-chat { width: 84px; height: 84px; right: 10px; bottom: 76px; }
+  .float-top { right: 31px; }
+}
+
+.test-banner { background: #fff4d6; border: 1px solid #f5d327; color: #6b5400; padding: 12px 14px; font-size: 14px; margin-bottom: 20px; }
