@@ -375,3 +375,11 @@ h1, h2, h3, h4,
 }
 
 .test-banner { background: #fff4d6; border: 1px solid #f5d327; color: #6b5400; padding: 12px 14px; font-size: 14px; margin-bottom: 20px; }
+
+/* ---------- 약관 / 개인정보처리방침 ---------- */
+.policy { font-size: 15px; line-height: 1.85; color: #444; }
+.policy h1 { margin-bottom: 40px; }
+.policy h2 { font-size: 19px; font-weight: 800; color: var(--ink); margin: 40px 0 12px; padding-top: 24px; border-top: 1px solid var(--line); }
+.policy h2:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.policy p { white-space: pre-line; margin-bottom: 12px; }
+@media (max-width: 768px) { .policy { font-size: 14px; } .policy h2 { font-size: 17px; } }

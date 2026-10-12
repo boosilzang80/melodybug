@@ -33,7 +33,8 @@ function buildForm(id: string, fields: Record<string, string>, action?: string) 
   const form = document.createElement("form");
   form.id = id;
   form.method = "POST";
-  form.acceptCharset = "UTF-8";
+  // 이니시스 모바일 결제창은 요청을 EUC-KR 로 읽는다 (결과는 P_CHARSET=utf8 로 받음)
+  form.acceptCharset = action ? "EUC-KR" : "UTF-8";
   if (action) form.action = action;
   form.style.display = "none";
   for (const [k, v] of Object.entries(fields)) {

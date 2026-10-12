@@ -1,49 +1,16 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { BIZ } from "@/lib/content";
+import PolicyDoc, { type PolicyBlock } from "@/components/PolicyDoc";
+import blocks from "@/content/privacy.json";
 
 export const metadata = { title: "개인정보처리방침" };
 
-// ⚠️ 초안입니다. 오픈 전 실제 운영 방식에 맞게 검토하세요.
 export default function Privacy() {
   return (
     <>
       <Header />
-      <main className="page pre" style={{ maxWidth: 800 }}>
-        <h1>개인정보처리방침</h1>
-        {`${BIZ.name}(이하 "회사")는 「개인정보 보호법」에 따라 이용자의 개인정보를 보호하고 관련 고충을 원활하게 처리하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.
-
-1. 수집하는 개인정보 항목 및 목적
-- 항목: 이름, 휴대폰 번호, 이메일, 요청사항, 결제 정보(결제수단, 거래번호)
-- 목적: 음악 제작 의뢰 접수 및 상담, 작업물 전달, 결제 및 환불 처리, 분쟁 대응
-
-2. 보유 및 이용 기간
-- 전자상거래 등에서의 소비자보호에 관한 법률에 따라
-  계약 또는 청약철회 등에 관한 기록: 5년
-  대금결제 및 재화 등의 공급에 관한 기록: 5년
-  소비자의 불만 또는 분쟁처리에 관한 기록: 3년
-
-3. 개인정보 처리 위탁
-- KG이니시스: 결제 처리
-- Supabase Inc.: 주문 데이터 저장(데이터베이스 호스팅)
-- Vercel Inc.: 웹사이트 호스팅
-
-4. 개인정보의 국외 이전
-- 이전받는 자: Supabase Inc., Vercel Inc.
-- 이전 항목: 위 1항의 수집 항목
-- 이전 목적 및 보유기간: 서비스 운영을 위한 데이터 저장 및 호스팅, 위 2항의 보유기간과 동일
-
-5. 이용자의 권리
-이용자는 언제든지 개인정보 열람, 정정, 삭제, 처리정지를 요청할 수 있으며, 아래 연락처로 요청하시면 지체 없이 조치하겠습니다.
-
-6. 개인정보의 파기
-보유기간이 지나거나 처리 목적이 달성된 개인정보는 지체 없이 파기합니다.
-
-7. 개인정보 보호책임자
-- 성명: ${BIZ.ceo}
-- 연락처: ${BIZ.tel}
-
-시행일: 2026년 00월 00일`}
+      <main className="page" style={{ maxWidth: 860 }}>
+        <PolicyDoc title="개인정보 보호정책" blocks={blocks as PolicyBlock[]} />
       </main>
       <Footer floating={false} />
     </>
