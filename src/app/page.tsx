@@ -87,6 +87,21 @@ export default function Home() {
           </div>
         </section>
 
+        {/* 작업 방식 */}
+        <section className="way3">
+          <div className="inner">
+            <ul className="way3-list">
+              {["멜로디버그(메인작곡가)를 중심으로,", "파트 전문가와의 협업을 통해,", "완성도 높은 결과물을 추구합니다."].map((t, i) => (
+                <li key={t} data-reveal style={{ "--d": `${i * 120}ms` } as React.CSSProperties}>{t}</li>
+              ))}
+            </ul>
+            <p className="way3-note" data-reveal>(협업 전문가와 계약서 작성, 안전성과 공정함 유지.)</p>
+            <p className="way3-b2b" data-reveal>B2B (Business to Business) 의뢰를 중심으로 하는 서비스입니다.</p>
+            <p className="way3-note" data-reveal>(개인문의 고객의 경우 상담을 통해 합리적인 견적을 드립니다.)</p>
+            <p className="way3-noai" data-reveal>- AI 사용 하지 않습니다. -</p>
+          </div>
+        </section>
+
         {/* 가격정보 */}
         <section id="price" className="section price-sec">
           <div className="inner">
