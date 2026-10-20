@@ -2,24 +2,25 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.melodybug.co.kr").replace(/\/$/, "");
+const TITLE = "멜로디버그 BGM 게임음악 영상음악 발라드 미디스트링";
 const DESCRIPTION =
-  "영상 음악, BGM, 게임음악, 애니메이션 음악 작·편곡. 20년 이상 음악경력의 멜로디버그가 영상을 돋보이게 하는 맞춤 음악을 제작합니다. 저작권 양도 포함.";
+  "20년이상의 다양한 음악경험을 갖춘 BGM제작 장인의 수준높은 결과물제공. 정부지원사업 공공기관사업 유경험, 뮤직프로듀서. 파트전문가들과의 협업. 세금계산서 발급가능 카드결제가능";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "멜로디버그 | BGM·영상음악·게임음악 제작", template: "%s | 멜로디버그" },
+  title: { default: TITLE, template: "%s | 멜로디버그" },
   description: DESCRIPTION,
-  keywords: ["bgm", "BGM 제작", "작곡", "게임음악", "영상음악", "배경음악", "애니메이션음악", "쇼츠", "쇼츠음악", "유튜브 BGM", "멜로디버그"],
+  keywords: ["bgm", "BGM 제작", "작곡", "게임음악", "영상음악", "배경음악", "애니메이션음악", "쇼츠", "쇼츠음악", "유튜브 BGM", "발라드", "미디스트링", "스팀 게임음악", "멜로디버그"],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "ko_KR",
     url: "/",
     siteName: "멜로디버그",
-    title: "멜로디버그 | BGM·영상음악·게임음악 제작",
+    title: TITLE,
     description: DESCRIPTION,
   },
-  twitter: { card: "summary_large_image", title: "멜로디버그 | BGM·영상음악·게임음악 제작", description: DESCRIPTION },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
   robots: { index: true, follow: true },
   verification: {
     // 구글 서치콘솔 인증 코드가 생기면 GOOGLE_SITE_VERIFICATION 환경변수에 넣으세요

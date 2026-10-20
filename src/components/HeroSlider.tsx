@@ -18,7 +18,7 @@ export default function HeroSlider() {
   return (
     <div className="hero-bg" aria-hidden="true">
       {SLIDES.map((src, i) => (
-        <Image key={src} src={src} alt="" fill priority={i === 0} sizes="100vw" className={i === index ? "on" : ""} />
+        <Image key={src} src={src} alt="멜로디버그 작곡 작업 모습" fill priority={i === 0} sizes="100vw" className={i === index ? "on" : ""} />
       ))}
     </div>
   );

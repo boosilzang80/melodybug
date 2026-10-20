@@ -17,11 +17,21 @@ const jsonLd = {
   alternateName: "MelodyBug",
   url: SITE_URL,
   image: `${SITE_URL}/opengraph-image`,
-  description: "영상 음악, BGM, 게임음악, 애니메이션 음악 작·편곡 전문",
+  description:
+    "영상 음악, BGM, 게임음악, 애니메이션 음악 작·편곡 전문. 포스코, 식품의약품안전처, KBSI, 웅진 북클럽, 한국저작권위원회, 마법천자문, Steam 발매 게임 등 작업. 2026년 7월 기준 누적 627건.",
   telephone: "+82-10-5109-7620",
-  founder: BIZ.ceo,
+  founder: {
+    "@type": "Person",
+    name: BIZ.ceo,
+    jobTitle: "작곡가 · 뮤직프로듀서",
+    description: "재즈피아니스트 출신의 20년 경력 영상·게임음악 작곡가",
+    alumniOf: { "@type": "CollegeOrUniversity", name: "숭실대학교 실용음악과" },
+    award: AWARDS,
+  },
+  knowsAbout: ["BGM 제작", "영상음악", "게임음악", "애니메이션 음악", "광고음악", "발라드", "미디스트링", "퓨전국악"],
+  taxID: BIZ.bizNo,
   address: { "@type": "PostalAddress", addressCountry: "KR", addressRegion: "경기도", addressLocality: "고양시 덕양구", streetAddress: "오금2로 26" },
-  sameAs: [SOUNDCLOUD_URL, KAKAO_URL],
+  sameAs: ["https://www.youtube.com/@melodybugBGM", "https://kmong.com/gig/190769", SOUNDCLOUD_URL, KAKAO_URL],
   makesOffer: PLANS.map((p) => ({
     "@type": "Offer",
     name: `BGM 제작 ${p.name}`,
@@ -46,6 +56,7 @@ export default function Home() {
           <HeroSlider />
           <div className="inner hero-text">
             <h1>
+              <span className="sr-only">멜로디버그 - BGM·영상음악·게임음악 작곡 제작</span>
               <span>Crafting Timeless</span> <span>Music with</span> <span>Exceptional</span> <span>Artistry</span>
             </h1>
             <p className="ko">예술적 완성도로, 평생 간직할 음악을 만듭니다.</p>
