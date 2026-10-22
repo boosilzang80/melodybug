@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   verification: {
     // 구글 서치콘솔 인증 코드가 생기면 GOOGLE_SITE_VERIFICATION 환경변수에 넣으세요
     google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
-    other: { "naver-site-verification": "7d14f1c1917951bf454b204b486264a2281caacf" },
+    other: { "naver-site-verification": ["7d14f1c1917951bf454b204b486264a2281caacf", "42853b265c243f2f9593d37616382fb1c997ba6f"] },
   },
 };
 
