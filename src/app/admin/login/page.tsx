@@ -10,8 +10,8 @@ export default function AdminLogin() {
       <h1>관리자 로그인</h1>
       <form action={action}>
         <div className="field">
-          <label htmlFor="email">이메일</label>
-          <input id="email" name="email" type="email" required autoComplete="username" />
+          <label htmlFor="email">아이디</label>
+          <input id="email" name="email" type="text" required autoComplete="username" autoCapitalize="none" />
         </div>
         <div className="field">
           <label htmlFor="password">비밀번호</label>

@@ -5,13 +5,19 @@ import { revalidatePath } from "next/cache";
 import { getAdminEmail, isAdminEmail, supabaseSession } from "@/lib/supabase-server";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
+/** "@"가 없으면 아이디로 보고 @gmail.com을 붙인다 (예: SIRmelod84 → sirmelod84@gmail.com) */
+function toLoginEmail(id: string) {
+  const v = id.trim();
+  return v.includes("@") ? v : `${v}@gmail.com`;
+}
+
 export async function login(_: string | null, formData: FormData): Promise<string | null> {
   const supabase = await supabaseSession();
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: String(formData.get("email") ?? ""),
+    email: toLoginEmail(String(formData.get("email") ?? "")),
     password: String(formData.get("password") ?? ""),
   });
-  if (error) return "이메일 또는 비밀번호가 올바르지 않습니다.";
+  if (error) return "아이디 또는 비밀번호가 올바르지 않습니다.";
   if (!isAdminEmail(data.user?.email)) {
     await supabase.auth.signOut();
     return "관리자 권한이 없는 계정입니다.";
