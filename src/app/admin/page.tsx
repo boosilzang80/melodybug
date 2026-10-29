@@ -33,7 +33,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
       <header className="admin-top">
         <h1>결제 내역</h1>
         <form action={logout}>
-          <span>{adminEmail}</span>
+          <span>{adminEmail.split("@")[0]}</span>
           <button>로그아웃</button>
         </form>
       </header>
