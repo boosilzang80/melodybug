@@ -15,6 +15,9 @@ const fmt = (iso: string | null) =>
 
 const phoneFmt = (p: string) => p.replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
 
+// 상단에 보여줄 아이디 표기 (Supabase는 이메일을 소문자로 저장하므로 대소문자를 여기서 맞춘다)
+const DISPLAY_ID: Record<string, string> = { sirmelod84: "SIRmelod84" };
+
 export default async function AdminPage({ searchParams }: { searchParams: Promise<{ status?: string; q?: string }> }) {
   const adminEmail = await getAdminEmail();
   if (!adminEmail) redirect("/admin/login");
@@ -33,7 +36,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
       <header className="admin-top">
         <h1>결제 내역</h1>
         <form action={logout}>
-          <span>{adminEmail.split("@")[0]}</span>
+          <span>{DISPLAY_ID[adminEmail.split("@")[0]] ?? adminEmail.split("@")[0]}</span>
           <button>로그아웃</button>
         </form>
       </header>
