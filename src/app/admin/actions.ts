@@ -7,7 +7,7 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 
 /** "@"가 없으면 아이디로 보고 @gmail.com을 붙인다 (예: SIRmelod84 → sirmelod84@gmail.com) */
 function toLoginEmail(id: string) {
-  const v = id.trim();
+  const v = id.trim().toLowerCase();
   return v.includes("@") ? v : `${v}@gmail.com`;
 }
 
